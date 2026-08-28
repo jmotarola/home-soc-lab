@@ -72,6 +72,12 @@ Key evidence:
 
 This test validated endpoint File Integrity Monitoring and real-time alert generation.
 
+#### Evidence
+
+![Wazuh realtime FIM detection — Rule 550](evidence/fim-realtime-rule-550.jpg)
+
+*Wazuh realtime FIM alert from `kali-attacker`: Rule 550, Level 7, `syscheck_integrity_changed`, with the modified path `/etc/wazuh_fim_test.txt` and MITRE ATT&CK T1565.001.*
+
 ### 2. Kali → SMB → Windows Authentication Failure
 
 A controlled SMB authentication attempt was performed from Kali Linux against the Windows endpoint.
@@ -109,6 +115,29 @@ A related remote logon event was also observed:
 - User: `ANONYMOUS LOGON`
 - Authentication: `NTLM`
 - Source IP: `192.168.100.20`
+
+#### Evidence
+
+![Windows SMB failed logon — Event 4625 / Wazuh Rule 60122](evidence/windows-smb-failed-logon-4625-rule-60122.jpg)
+
+*Controlled SMB authentication failure from Kali (`192.168.100.20`) to the Windows endpoint. Wazuh records Event ID 4625, Logon Type 3 and Rule 60122.*
+
+![Windows remote logon — Wazuh Rule 92652](evidence/windows-remote-logon-rule-92652.jpg)
+
+*Related remote logon observed by Wazuh from the same Kali source IP, using NTLM authentication.*
+
+<details>
+<summary>Additional event evidence</summary>
+
+![Second Windows SMB failed-logon event](evidence/windows-smb-failed-logon-4625-second-event.jpg)
+
+*Second controlled authentication-failure event from the same SMB test sequence.*
+
+![Windows Event 4624 remote-logon details](evidence/windows-remote-logon-4624-detail.jpg)
+
+*Detailed Windows Event ID 4624 evidence showing Logon Type 3, NTLM and source IP `192.168.100.20`.*
+
+</details>
 
 ### 3. Windows Local Failed Logon
 
